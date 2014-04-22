@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -26,13 +26,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, COUNTRIES);
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
         textView.setAdapter(adapter);
-        
-
-        
     }
 
     private static final String[] COUNTRIES = new String[] {
@@ -47,15 +43,17 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    public void documentation(View view){
+    	Intent intent = new Intent(this, MethodListActivity.class);
+    	startActivity(intent);
+    }
     
     public void prettify(View view){
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
-
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
-    	textView.setText(Html.fromHtml(highlighted));
-    	
+    	textView.setText(Html.fromHtml(highlighted));    	
     }
     
     public void saveFile(View view){
@@ -66,15 +64,20 @@ public class MainActivity extends Activity {
         String code = codeEditor.getText().toString();
     	FileOutputStream fos;
 		try {
-			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-			fos.write(code.getBytes());
-	    	fos.close();
+				fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+				fos.write(code.getBytes());
+				fos.close();
+				Toast.makeText(getApplicationContext(), "File saved: " + FILENAME, Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+	    	Toast.makeText(getApplicationContext(), "Error saving file enter a filename " + FILENAME, Toast.LENGTH_LONG).show();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+	    	Toast.makeText(getApplicationContext(), "Error saving file" + FILENAME, Toast.LENGTH_LONG).show();
+
 		}
     	
     }

@@ -25,22 +25,46 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
+        public static final int action_settings=0x7f08000f;
+        public static final int button1=0x7f080009;
         public static final int button_load=0x7f080003;
         public static final int button_save=0x7f080002;
-        public static final int clear_button=0x7f080009;
+        public static final int clear_button=0x7f08000d;
+        public static final int documentation_button=0x7f080006;
         public static final int editText_filename=0x7f080001;
         public static final int filesList=0x7f080000;
         public static final int input_text=0x7f080004;
-        public static final int list=0x7f080007;
-        public static final int parse_button=0x7f080006;
+        public static final int list=0x7f08000b;
+        public static final int method_detail=0x7f08000e;
+        public static final int method_detail_container=0x7f080008;
+        public static final int method_list=0x7f08000a;
+        public static final int parse_button=0x7f080007;
         public static final int pretty=0x7f080005;
-        public static final int sendCode_button=0x7f080008;
+        public static final int sendCode_button=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_files_table=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int activity_send_code=0x7f030002;
+        public static final int activity_method_detail=0x7f030002;
+        /** 
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on Large screens.
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    
+
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on Large screens.
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    
+         */
+        public static final int activity_method_list=0x7f030003;
+        public static final int activity_method_twopane=0x7f030004;
+        public static final int activity_send_code=0x7f030005;
+        public static final int fragment_method_detail=0x7f030006;
     }
     public static final class menu {
         public static final int files_table=0x7f070000;
@@ -53,6 +77,8 @@ public final class R {
         public static final int hello_world=0x7f050002;
         public static final int title_activity_files_table=0x7f050004;
         public static final int title_activity_send_code=0x7f050003;
+        public static final int title_method_detail=0x7f050006;
+        public static final int title_method_list=0x7f050005;
     }
     public static final class style {
         /** 

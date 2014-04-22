@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_send_code">SendCodeActivity</string>
     <string name="title_activity_files_table">FilesTableActivity</string>
+    <string name="title_method_list">Methods</string>
+    <string name="title_method_detail">Method Detail</string>
 
 </resources>
