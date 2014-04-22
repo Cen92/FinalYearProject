@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:baselineAligned="true"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editText_filename"
+            android:layout_width="156dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Filename..." >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="saveFile"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/button_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="loadFile"
+            android:text="Load" />
+    </LinearLayout>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/input_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.95"
+        android:background="@drawable/greybg"
+        android:completionThreshold="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/pretty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="prettify"
+            android:text="Prettify" />
+
+        <Button
+            android:id="@+id/parse_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sendMessage"
+            android:text="Run" />
+    </LinearLayout>
+
+</LinearLayout>
