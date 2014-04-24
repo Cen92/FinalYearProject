@@ -46,13 +46,7 @@ public class MethodDetailActivity extends FragmentActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.method_detail_container, fragment).commit();
 		}
-		
-		Button clearButton = (Button) findViewById(R.id.button1);
-		clearButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-            	System.out.println("Click on button");
-            }
-        });
+
 	}
 
 	@Override

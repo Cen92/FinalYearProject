@@ -8,5 +8,8 @@
     <string name="title_activity_files_table">FilesTableActivity</string>
     <string name="title_method_list">Methods</string>
     <string name="title_method_detail">Method Detail</string>
+    <string name="document">Documentation</string>
+    <string name="files">File Browser</string>
+    
 
 </resources>

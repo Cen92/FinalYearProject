@@ -5,5 +5,7 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item android:id="@+id/menu_documentation" android:title="@string/document" android:orderInCategory="101" android:showAsAction="never"></item>
+    <item android:id="@+id/menu_file_browser" android:showAsAction="never" android:title="@string/files" android:orderInCategory="99"></item>
 
 </menu>

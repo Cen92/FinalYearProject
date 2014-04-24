@@ -6,16 +6,10 @@
     tools:context=".MethodDetailActivity"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
-        android:layout_width="99dp"
-        android:layout_height="80dp"
-        android:orientation="vertical" >
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="TextView" />
 
 </FrameLayout>

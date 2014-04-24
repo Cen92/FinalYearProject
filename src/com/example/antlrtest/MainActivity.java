@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -43,6 +44,30 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent = null;
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+            	System.out.println("Clicked on Menu");
+            	
+            	break;
+            case R.id.menu_documentation:
+            	intent = new Intent(this, MethodListActivity.class);
+            	startActivity(intent);
+                break;
+                
+            case R.id.menu_file_browser:
+            	intent = new Intent(this, FilesTableActivity.class);
+            	startActivity(intent);
+                break;    
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    	return true;
+    }
+    
     public void documentation(View view){
     	Intent intent = new Intent(this, MethodListActivity.class);
     	startActivity(intent);
@@ -53,7 +78,9 @@ public class MainActivity extends Activity {
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
-    	textView.setText(Html.fromHtml(highlighted));    	
+    	String newSTR = highlighted.replace(";",";<br>");
+    	textView.setText(Html.fromHtml(newSTR));   
+
     }
     
     public void saveFile(View view){

@@ -14,17 +14,17 @@
             android:id="@+id/editText_filename"
             android:layout_width="156dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.69"
             android:ems="10"
             android:hint="Filename..." >
 
-            <requestFocus />
         </EditText>
 
         <Button
             android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.19"
             android:onClick="saveFile"
             android:text="Save" />
 
@@ -32,13 +32,14 @@
             android:id="@+id/button_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.18"
             android:onClick="loadFile"
             android:text="Load" />
     </LinearLayout>
 
     <MultiAutoCompleteTextView
         android:id="@+id/input_text"
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.95"
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="documentation"
-            android:text="Button" />
+            android:text="Documentation" />
 
         <Button
             android:id="@+id/parse_button"

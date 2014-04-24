@@ -54,8 +54,8 @@ public class MethodDetailFragment extends Fragment {
 
 		// Show the dummy content as text in a TextView.
 		if (mItem != null) {
-			((TextView) rootView.findViewById(R.id.method_detail))
-					.setText(mItem.content);
+			((TextView) rootView.findViewById(R.id.textView1))
+					.setText(mItem.exampleUse);
 		}
 
 		return rootView;
