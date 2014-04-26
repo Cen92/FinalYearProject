@@ -10,7 +10,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,14 +25,61 @@ public class MainActivity extends Activity {
 	
 	public BluetoothManager bm;
 	public AutoCompleteTextView textView;
+	public boolean prettifyText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, COUNTRIES);
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+        textView.addTextChangedListener(mTextEditorWatcher);
         textView.setAdapter(adapter);
     }
+    
+    public final TextWatcher  mTextEditorWatcher = new TextWatcher() {
+        
+    	String old;
+    	
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+        {
+                    // When No Password Entered
+                   //textViewPasswordStrengthIndiactor.setText("Not Entered");
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+//        	if(s.toString().contains(";")){
+//        		prettifyText = false;
+//        		old = s.toString();
+//        		int indexOfSColon = old.lastIndexOf(";");
+//        		String lastLine = old.substring(indexOfSColon+1, old.length());
+//        		String lastChar = old.substring(old.length()-1);
+//        		if(lastChar.equalsIgnoreCase(";")){
+//        			prettifyText = true;
+//        			prettifyCode(lastLine);
+//        		}	
+//        		
+//           }
+        }
+
+        public void afterTextChanged(Editable s)
+        {
+        	if(s.toString().contains(";")){
+        		old = s.toString();
+        		int indexOfSColon = old.lastIndexOf(";");
+        		String lastLine = old.substring(indexOfSColon+1, old.length());
+        		String lastChar = old.substring(old.length()-1);
+        		System.out.println("Last char is:" +lastChar);
+        		if(lastChar.equalsIgnoreCase(";")){
+        			prettifyCode(lastLine);
+        			System.out.println(old.length());
+        		}	
+        		
+           }
+        	
+        }
+};
 
     private static final String[] COUNTRIES = new String[] {
             "Belgium", "France", "Italy", "Germany", "Spain", "moveForward();", "moveBackward()"
@@ -79,7 +128,31 @@ public class MainActivity extends Activity {
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
     	String newSTR = highlighted.replace(";",";<br>");
-    	textView.setText(Html.fromHtml(newSTR));   
+    	textView.setText(Html.fromHtml(newSTR));
+    	textView.setSelection(textView.getText().length());
+    }
+    
+    public void prettifyCode(String codeToPrettify){
+//    		AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+//    		String code = codeToPrettify;
+//    		code = code.concat("<br>");
+//    		System.out.println(codeToPrettify);
+//    		PrettifyHighlighter highlighter = new PrettifyHighlighter();
+//    		String highlighted = highlighter.highlight("java", code);
+//    		String newSTR = highlighted.replace(";",";<br>");
+//    		String oldText = textView.getText().toString();
+//    		oldText = oldText.concat(newSTR);
+//			textView.setText(Html.fromHtml(oldText));
+
+//			oldText = oldText.concat("<br>");
+//			textView.setText(Html.fromHtml(oldText));
+    	AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+        String code = textView.getText().toString();
+    	PrettifyHighlighter highlighter = new PrettifyHighlighter();
+    	String highlighted = highlighter.highlight("java", code);
+    	String newSTR = highlighted.replace(";",";<br>");
+    	textView.setText(Html.fromHtml(newSTR));
+    	textView.setSelection(textView.getText().length());
 
     }
     
@@ -144,5 +217,5 @@ public class MainActivity extends Activity {
             }
         }
     }
-    
 }
+
