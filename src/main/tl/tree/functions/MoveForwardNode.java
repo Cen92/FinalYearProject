@@ -28,6 +28,7 @@ public class MoveForwardNode implements TLNode {
     TLValue value = expression.evaluate();
     BluetoothManager instance = BluetoothManager.getInstance();
     byte[] buffer = new byte[14];
+	double distance = 2*value.asDouble();
 	
 	buffer[0] = 0x0c;			//length lsb
 	buffer[1] = 0;						// length msb
@@ -40,12 +41,12 @@ public class MoveForwardNode implements TLNode {
 	buffer[8] = 0;						// turn ratio??
 	buffer[9] = 0x20;					// run state
 	buffer[10] =0;
-	buffer[11] =2;
+	buffer[11] =(byte)distance;
 	buffer[12] =0;
 	buffer[13] =0;
 
     instance.addToArray(buffer);
-    
+    System.out.println(buffer[11]);
     return TLValue.VOID;
     
   }

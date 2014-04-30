@@ -10,6 +10,12 @@
     <string name="title_method_detail">Method Detail</string>
     <string name="document">Documentation</string>
     <string name="files">File Browser</string>
-    
+    <string-array name="list_of_suggestions">
+      <item >moveForward()</item>
+      <item >moveBackward()</item>
+      <item >shoot()</item>
+      <item >turnLeft()</item>
+      <item >turnRight()</item>
+      </string-array>
 
 </resources>

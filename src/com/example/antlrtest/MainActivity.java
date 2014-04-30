@@ -3,7 +3,6 @@ package com.example.antlrtest;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import main.tl.Main;
 import main.tl.TLValue;
 import android.app.Activity;
@@ -19,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -31,10 +31,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+        String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,suggestions);
+        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.input_text);
         textView.addTextChangedListener(mTextEditorWatcher);
         textView.setAdapter(adapter);
+        textView.setTokenizer(new SColonTokenizer());
     }
     
     public final TextWatcher  mTextEditorWatcher = new TextWatcher() {
@@ -72,18 +74,17 @@ public class MainActivity extends Activity {
         		String lastChar = old.substring(old.length()-1);
         		System.out.println("Last char is:" +lastChar);
         		if(lastChar.equalsIgnoreCase(";")){
-        			prettifyCode(lastLine);
+        			//prettifyCode(lastLine);
         			System.out.println(old.length());
         		}	
         		
            }
         	
+        	
+        	
         }
 };
 
-    private static final String[] COUNTRIES = new String[] {
-            "Belgium", "France", "Italy", "Germany", "Spain", "moveForward();", "moveBackward()"
-    };
 
 
     @Override
@@ -122,6 +123,8 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    
+    
     public void prettify(View view){
         AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
         String code = textView.getText().toString();
@@ -132,27 +135,27 @@ public class MainActivity extends Activity {
     	textView.setSelection(textView.getText().length());
     }
     
+    public void addToSuggestions(String[] words){
+    	
+    }
+    
     public void prettifyCode(String codeToPrettify){
-//    		AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
-//    		String code = codeToPrettify;
-//    		code = code.concat("<br>");
-//    		System.out.println(codeToPrettify);
-//    		PrettifyHighlighter highlighter = new PrettifyHighlighter();
-//    		String highlighted = highlighter.highlight("java", code);
-//    		String newSTR = highlighted.replace(";",";<br>");
-//    		String oldText = textView.getText().toString();
-//    		oldText = oldText.concat(newSTR);
-//			textView.setText(Html.fromHtml(oldText));
-
-//			oldText = oldText.concat("<br>");
-//			textView.setText(Html.fromHtml(oldText));
     	AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
-    	String newSTR = highlighted.replace(";",";<br>");
-    	textView.setText(Html.fromHtml(newSTR));
-    	textView.setSelection(textView.getText().length());
+    	textView.setText(Html.fromHtml(highlighted));
+
+//    	String newSTR = highlighted.replace(";",";<br>");
+//    	textView.setText(Html.fromHtml(newSTR));
+    	textView.setSelection(textView.getText().length());//set  cursor to end
+    	
+    	//scan all words in file and add to words array
+    	String[] words; code.split(" ");
+    	//addToSuggestions();
+    	
+    	
+    	
 
     }
     
