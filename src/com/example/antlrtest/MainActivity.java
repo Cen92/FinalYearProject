@@ -44,8 +44,7 @@ public class MainActivity extends Activity {
     	
         public void beforeTextChanged(CharSequence s, int start, int count, int after)
         {
-                    // When No Password Entered
-                   //textViewPasswordStrengthIndiactor.setText("Not Entered");
+        	//do nothing method is needed by textWatcher
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -67,16 +66,26 @@ public class MainActivity extends Activity {
         public void afterTextChanged(Editable s)
         {
         	if(s.toString().contains(";")){
-        		old = s.toString();
-        		int indexOfSColon = old.lastIndexOf(";");
-        		String lastLine = old.substring(indexOfSColon+1, old.length());
-        		String lastChar = old.substring(old.length()-1);
-        		System.out.println("Last char is:" +lastChar);
-        		if(lastChar.equalsIgnoreCase(";")){
-        			prettifyCode(lastLine);
-        			System.out.println(old.length());
-        		}	
         		
+//        		old = s.toString();
+//        		old.
+//        		int indexOfLastSColon = old.lastIndexOf(";");
+//        		String lineToPrettyify = old.substring(indexOfLastSColon+1, old.length());
+//        		char lastChar = old.charAt(old.length()-1);
+//        		if(lastChar == ';'){
+//            		String lastLine = old.substring(indexOfSColon+1, old.length());
+// 
+////        			prettifyCode(lastLine);
+////        			System.out.println(old.length());
+//        		}	
+        		
+        		
+        		old=s.toString();
+        		char lastChar = old.charAt(old.length()-1);
+        		if(lastChar == ';'){
+        			prettifyCode();
+        		}
+        			
            }
         	
         	
@@ -138,17 +147,14 @@ public class MainActivity extends Activity {
     	
     }
     
-    public void prettifyCode(String codeToPrettify){
+    public void prettifyCode(){
     	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
-    	textView.setText(Html.fromHtml(highlighted));
-
-//    	String newSTR = highlighted.replace(";",";<br>");
-//    	textView.setText(Html.fromHtml(newSTR));
+    	String newSTR = highlighted.replace(";",";<br>");
+    	textView.setText(Html.fromHtml(newSTR));
     	textView.setSelection(textView.getText().length());//set  cursor to end
-    	
     	//scan all words in file and add to words array
     	String[] words; code.split(" ");
     	//addToSuggestions();
