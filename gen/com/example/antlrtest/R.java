@@ -32,10 +32,10 @@ public final class R {
         public static final int button_load=0x7f090003;
         public static final int button_save=0x7f090002;
         public static final int clear_button=0x7f09000d;
+        public static final int code_text=0x7f090004;
         public static final int documentation_button=0x7f090006;
         public static final int editText_filename=0x7f090001;
         public static final int filesList=0x7f090000;
-        public static final int input_text=0x7f090004;
         public static final int list=0x7f09000b;
         public static final int menu_documentation=0x7f09000f;
         public static final int menu_file_browser=0x7f090010;
@@ -79,8 +79,15 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int document=0x7f050007;
-        public static final int files=0x7f050008;
+        public static final int fileNameText=0x7f05000a;
+        public static final int files=0x7f050009;
         public static final int hello_world=0x7f050002;
+        public static final int highlight=0x7f050008;
+        public static final int load=0x7f05000c;
+        public static final int run=0x7f05000d;
+        /** &#8230 is ...  
+         */
+        public static final int save=0x7f05000b;
         public static final int title_activity_files_table=0x7f050004;
         public static final int title_activity_send_code=0x7f050003;
         public static final int title_method_detail=0x7f050006;

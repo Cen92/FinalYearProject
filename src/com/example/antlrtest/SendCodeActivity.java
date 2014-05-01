@@ -42,7 +42,7 @@ public class SendCodeActivity extends Activity {
 		bm = BluetoothManager.getInstance();
         listView = (ListView) findViewById(R.id.list);
 
-		ArrayList<String> pdArrayList = new ArrayList<String>();//init list
+		pdArrayList = new ArrayList<String>();//init list
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
 		// If there are paired devices
 		if (bondedDevices.size() > 0) {

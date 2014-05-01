@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ANTLRTest</string>
+    <string name="app_name">Mind Coder</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_send_code">SendCodeActivity</string>
@@ -9,7 +9,15 @@
     <string name="title_method_list">Methods</string>
     <string name="title_method_detail">Method Detail</string>
     <string name="document">Documentation</string>
+    <string name="highlight">Highlight</string>
+    
     <string name="files">File Browser</string>
+    <string name="fileNameText">Filename&#8230;</string><!--&#8230 is ...  -->
+    <string name="save">Save</string>
+    <string name="load">Load</string>
+    <string name="run">Run</string>
+    
+    
     <string-array name="list_of_suggestions">
       <item >moveForward()</item>
       <item >moveBackward()</item>

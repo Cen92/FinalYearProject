@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
@@ -24,7 +23,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 	public BluetoothManager bm;
-	public AutoCompleteTextView textView;
+	public MultiAutoCompleteTextView textView;
 	public boolean prettifyText;
 
     @Override
@@ -33,7 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,suggestions);
-        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.input_text);
+        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         textView.addTextChangedListener(mTextEditorWatcher);
         textView.setAdapter(adapter);
         textView.setTokenizer(new SColonTokenizer());
@@ -74,7 +73,7 @@ public class MainActivity extends Activity {
         		String lastChar = old.substring(old.length()-1);
         		System.out.println("Last char is:" +lastChar);
         		if(lastChar.equalsIgnoreCase(";")){
-        			//prettifyCode(lastLine);
+        			prettifyCode(lastLine);
         			System.out.println(old.length());
         		}	
         		
@@ -126,7 +125,7 @@ public class MainActivity extends Activity {
     
     
     public void prettify(View view){
-        AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+    	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
@@ -140,7 +139,7 @@ public class MainActivity extends Activity {
     }
     
     public void prettifyCode(String codeToPrettify){
-    	AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.input_text);
+    	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
@@ -163,7 +162,7 @@ public class MainActivity extends Activity {
     	EditText textView = (EditText)findViewById(R.id.editText_filename);
     	String FILENAME = textView.getText().toString();
     	
-    	AutoCompleteTextView codeEditor = (AutoCompleteTextView)findViewById(R.id.input_text);
+    	MultiAutoCompleteTextView codeEditor = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = codeEditor.getText().toString();
     	FileOutputStream fos;
 		try {
@@ -193,7 +192,7 @@ public class MainActivity extends Activity {
         Main object = new Main();
         //BluetoothManager bm = new BluetoothManager();
         		try {
-        	EditText in = (EditText)findViewById(R.id.input_text);
+        	MultiAutoCompleteTextView in = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
             String source = in.getText().toString();
             TLValue parserOutput = object.main(source);
             
@@ -215,7 +214,7 @@ public class MainActivity extends Activity {
             	textView.setText(data.getExtras().getString("myFilename"));
             }
             if (data.hasExtra("myCode")) {
-            	AutoCompleteTextView codeEditor = (AutoCompleteTextView)findViewById(R.id.input_text);
+            	MultiAutoCompleteTextView codeEditor = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
             	codeEditor.setText(data.getExtras().getString("myCode"));
             }
         }

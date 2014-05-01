@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.69"
             android:ems="10"
-            android:hint="Filename..." >
+            android:hint="@string/fileNameText" >
 
         </EditText>
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.19"
             android:onClick="saveFile"
-            android:text="Save" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/button_load"
@@ -34,42 +34,46 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.18"
             android:onClick="loadFile"
-            android:text="Load" />
+            android:text="@string/load" />
     </LinearLayout>
 
+
+
     <MultiAutoCompleteTextView
-        android:id="@+id/input_text"
+        android:id="@+id/code_text"
+        android:labelFor="@id/code_text"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_weight="0.95"
         android:background="@drawable/greybg"
         android:completionThreshold="1" />
 
-    <LinearLayout
+    	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
         <Button
             android:id="@+id/pretty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="prettify"
-            android:text="Highlight  " />
+            android:text="@string/highlight" />
 
         <Button
             android:id="@+id/documentation_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="documentation"
-            android:text="Documentation" />
+            android:background="?android:attr/selectableItemBackground"
+           	android:text="@string/document" />
 
         <Button
             android:id="@+id/parse_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="sendMessage"
-            android:text="Run" />
-    </LinearLayout>
-
+            android:background="?android:attr/selectableItemBackground"            
+            android:text="@string/run" />
+	</LinearLayout>
 </LinearLayout>
