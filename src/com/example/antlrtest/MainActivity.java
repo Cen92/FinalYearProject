@@ -3,6 +3,7 @@ package com.example.antlrtest;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import main.tl.Main;
 import main.tl.TLValue;
 import android.app.Activity;
@@ -11,10 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
@@ -32,10 +37,19 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,suggestions);
-        MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
+        final MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         textView.addTextChangedListener(mTextEditorWatcher);
         textView.setAdapter(adapter);
         textView.setTokenizer(new SColonTokenizer());
+        textView.setOnItemClickListener(new OnItemClickListener ()
+        {
+        	 @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id)           
+             {
+              textView.setSelection(textView.getText().length()-1);//set cursor to inside parenthesis
+             }
+        });
+        
     }
     
     public final TextWatcher  mTextEditorWatcher = new TextWatcher() {
@@ -49,37 +63,21 @@ public class MainActivity extends Activity {
 
         public void onTextChanged(CharSequence s, int start, int before, int count)
         {
+        	//do nothing method is needed by textWatcher
 //        	if(s.toString().contains(";")){
-//        		prettifyText = false;
-//        		old = s.toString();
-//        		int indexOfSColon = old.lastIndexOf(";");
-//        		String lastLine = old.substring(indexOfSColon+1, old.length());
-//        		String lastChar = old.substring(old.length()-1);
-//        		if(lastChar.equalsIgnoreCase(";")){
-//        			prettifyText = true;
-//        			prettifyCode(lastLine);
-//        		}	
-//        		
+//        		old=s.toString();
+//        		char lastChar = old.charAt(old.length()-1);
+//        		if(lastChar == ';'){
+//        			prettifyCode();
+//        		}
+//        			
 //           }
+
         }
 
         public void afterTextChanged(Editable s)
         {
         	if(s.toString().contains(";")){
-        		
-//        		old = s.toString();
-//        		old.
-//        		int indexOfLastSColon = old.lastIndexOf(";");
-//        		String lineToPrettyify = old.substring(indexOfLastSColon+1, old.length());
-//        		char lastChar = old.charAt(old.length()-1);
-//        		if(lastChar == ';'){
-//            		String lastLine = old.substring(indexOfSColon+1, old.length());
-// 
-////        			prettifyCode(lastLine);
-////        			System.out.println(old.length());
-//        		}	
-        		
-        		
         		old=s.toString();
         		char lastChar = old.charAt(old.length()-1);
         		if(lastChar == ';'){
@@ -87,11 +85,8 @@ public class MainActivity extends Activity {
         		}
         			
            }
-        	
-        	
-        	
         }
-};
+    };
 
 
 
@@ -156,7 +151,16 @@ public class MainActivity extends Activity {
     	textView.setText(Html.fromHtml(newSTR));
     	textView.setSelection(textView.getText().length());//set  cursor to end
     	//scan all words in file and add to words array
-    	String[] words; code.split(" ");
+    	String[] words = code.split(" ");
+    	String[]words2 = code.split("<br>");
+    	for(int i=0;i<words.length;i++){
+    		if(words[i].toString().contains("(") ||words[i].toString().contains(")")){
+    		}
+    		else{
+        		System.out.println(words[i].toString());
+        		
+    		}
+    	}
     	//addToSuggestions();
     	
     	

@@ -10,7 +10,7 @@
     <string name="title_method_detail">Method Detail</string>
     <string name="document">Documentation</string>
     <string name="highlight">Highlight</string>
-    
+    <string name="code_hint">Enter some code&#8230;</string>
     <string name="files">File Browser</string>
     <string name="fileNameText">Filename&#8230;</string><!--&#8230 is ...  -->
     <string name="save">Save</string>
@@ -19,11 +19,11 @@
     
     
     <string-array name="list_of_suggestions">
-      <item >moveForward()</item>
-      <item >moveBackward()</item>
-      <item >shoot()</item>
-      <item >turnLeft()</item>
-      <item >turnRight()</item>
+      <item>moveForward()</item>
+      <item>moveBackward()</item>
+      <item>shoot()</item>
+      <item>turnLeft()</item>
+      <item>turnRight()</item>
       </string-array>
 
 </resources>

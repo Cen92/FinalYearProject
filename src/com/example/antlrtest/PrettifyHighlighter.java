@@ -34,11 +34,11 @@ public class PrettifyHighlighter {
     private static Map<String, String> buildColorsMap() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("typ", "87cefa");
-        map.put("kwd", "00ff00");
-        map.put("lit", "ffff00");
-        map.put("com", "999999");
+        map.put("kwd", "87cefa");//function names
+        map.put("lit", "87cefa");//variables
+        map.put("com", "ff0000");
         map.put("str", "ff4500");
-        map.put("pun", "eeeeee");
+        map.put("pun", "ff9900");//brackets
         map.put("pln", "ff0000");
         return map;
     }
