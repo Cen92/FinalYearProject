@@ -32,7 +32,8 @@ public class SendCodeActivity extends Activity {
 	private ArrayList<String> pdArrayList;
 	private ConnectThread connectThread;
 	private ConnectedThread connectedThread;
-	
+	public int numberOfCommandsSent=0;
+	private boolean moreToSend;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class SendCodeActivity extends Activity {
 		Button moveButton = (Button) findViewById(R.id.sendCode_button);
 		moveButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-            	sendCommand(0);
+            	sendCommand(numberOfCommandsSent);
             }
         });
 		
@@ -94,20 +95,33 @@ public class SendCodeActivity extends Activity {
         }); 
 	}
 	public void sendCommand(int i){
-		
-    		byte [] command = bm.codeToSend.get(i);
-    		System.out.println(command);
+			
+			byte [] command = bm.codeToSend.get(i);
     		write(command);
+    		
     	if(i >= bm.codeToSend.size()){
+    		moreToSend = false;
     		bm.codeToSend.clear();
-    	}
-		
-		
+    		numberOfCommandsSent = 0;
+    	}	
 	}
+	
 	private void write(byte[] data){
+			
     	ConnectedThread ct;
     	ct = connectedThread;
     	ct.write(data);
+    	int timeToRun = data[11];
+    	System.out.println("Data 11 is:" +data[11]);
+    	try {
+			Thread.sleep(750*timeToRun);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		numberOfCommandsSent++;
+    	sendCommand(numberOfCommandsSent);
+    	
     }
     
     private class ConnectThread extends Thread {
@@ -163,15 +177,15 @@ public class SendCodeActivity extends Activity {
         }
         
         public void run() {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[14];//1024
             int bytes;
-            int i=0;
             while (true) {
                 try {
-                	i++;
-                	System.out.println("Reply recieved");
+                	
                 	bytes = mmInStream.read(buffer);
-                	sendCommand(i);
+                	//when I get the reply send another
+
+                	
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;
@@ -180,6 +194,7 @@ public class SendCodeActivity extends Activity {
         }
          public void write(byte[] buffer) {
             try {
+            	
                 mmOutStream.write(buffer);
             } catch (IOException e) {
                 e.printStackTrace();

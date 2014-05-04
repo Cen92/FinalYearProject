@@ -1,4 +1,4 @@
-package main.tl.tree.functions;
+  package main.tl.tree.functions;
 
 import java.io.PrintStream;
 
@@ -26,7 +26,9 @@ public class ShootNode implements TLNode {
     
     TLValue value = expression.evaluate();
     BluetoothManager instance = BluetoothManager.getInstance();
-    byte[] buffer = new byte[14];
+    byte[] buffer = new byte[42];
+	double distance = 1*value.asDouble();
+
 	buffer[0] = 0x0c;			//length lsb
 	buffer[1] = 0;						// length msb
 	buffer[2] = (byte)0x00;						// direct command (with response)
@@ -38,9 +40,10 @@ public class ShootNode implements TLNode {
 	buffer[8] = 0;						// turn ratio??
 	buffer[9] = 0x20;					// run state
 	buffer[10] =0;
-	buffer[11] =2;
+	buffer[11] =(byte)distance;
 	buffer[12] =0;
 	buffer[13] =0;
+
 	instance.addToArray(buffer);
 
     return TLValue.VOID;

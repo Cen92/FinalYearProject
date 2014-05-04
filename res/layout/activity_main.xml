@@ -46,9 +46,10 @@
         android:layout_weight="0.95"
         android:background="@drawable/greybg"
         android:completionThreshold="1"
+        android:ems="10"
         android:hint="@string/code_hint"
-        android:inputType="textFilter|textMultiLine|textNoSuggestions"
         android:imeOptions="actionDone"
+        android:inputType="textFilter|textMultiLine|textNoSuggestions"
         android:labelFor="@id/code_text" />
 		
     	<LinearLayout

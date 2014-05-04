@@ -17,8 +17,8 @@ public class BluetoothManager {
 	    return instance;
 	}
 	
-	public  void addToArray(byte[] moveForward){
-		codeToSend.add(moveForward);	
+	public  void addToArray(byte[] array){
+		codeToSend.add(array);	
 		System.out.println(codeToSend);
 	}	
 

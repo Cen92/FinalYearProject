@@ -3,6 +3,9 @@ package com.example.antlrtest;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import main.tl.Main;
 import main.tl.TLValue;
@@ -12,12 +15,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -148,24 +149,38 @@ public class MainActivity extends Activity {
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
     	String highlighted = highlighter.highlight("java", code);
     	String newSTR = highlighted.replace(";",";<br>");
+
     	textView.setText(Html.fromHtml(newSTR));
     	textView.setSelection(textView.getText().length());//set  cursor to end
     	//scan all words in file and add to words array
     	String[] words = code.split(" ");
-    	String[]words2 = code.split("<br>");
+    	String[] newSuggestions = new String[words.length];
+        String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
+		int nextIndex = 0;
+
+        
     	for(int i=0;i<words.length;i++){
-    		if(words[i].toString().contains("(") ||words[i].toString().contains(")")){
+    		if(words[i].toString().contains("(") || words[i].toString().contains(")")){
+    			//do nothing
+    		}
+    		if(words[i].toString().contains(";")){
+    			String newWordWithoutSemiColon = words[i];
+    			newWordWithoutSemiColon = newWordWithoutSemiColon.replace(";", "");
+    			newSuggestions[nextIndex] = newWordWithoutSemiColon;
+    			nextIndex++;
     		}
     		else{
-        		System.out.println(words[i].toString());
-        		
-    		}
+                newSuggestions[nextIndex] = words[i];
+                nextIndex++;
+            }
     	}
-    	//addToSuggestions();
     	
-    	
-    	
-
+    	List list = new ArrayList(Arrays.asList(suggestions));
+    	list.addAll(Arrays.asList(newSuggestions));
+    	Object[] results = list.toArray(); 
+    	System.out.println(Arrays.toString(results));
+    	ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,results);
+        textView.setAdapter(adapter);
     }
     
     public void saveFile(View view){

@@ -26,7 +26,8 @@ public class TurnRightNode implements TLNode {
     
     TLValue value = expression.evaluate();
     BluetoothManager instance = BluetoothManager.getInstance();
-    byte[] buffer = new byte[14];
+    double distance = 1*value.asDouble();
+    byte[] buffer = new byte[28];
 	buffer[0] = 0x0c;			//length lsb
 	buffer[1] = 0;						// length msb
 	buffer[2] = (byte)0x00;						// direct command (with response)
@@ -38,9 +39,23 @@ public class TurnRightNode implements TLNode {
 	buffer[8] = 0;						// turn ratio??
 	buffer[9] = 0x20;					// run state
 	buffer[10] =0;
-	buffer[11] =2;
+	buffer[11] =(byte)distance;
 	buffer[12] =0;
 	buffer[13] =0;
+	buffer[14] = 0x0c;			//length lsb
+	buffer[15] = 0;						// length msb
+	buffer[16] = (byte)0x00;						// direct command (with response)
+	buffer[17] = 0x04;					// set output state
+	buffer[18] = (byte) 0x00;			// output 1 (motor B)
+	buffer[19] = (byte) 0x9C ;			// power
+	buffer[20] = 0x07;					// motor on + brake between PWM
+	buffer[21] = 0;						// regulation
+	buffer[22] = 0;						// turn ratio??
+	buffer[23] = 0x20;					// run state
+	buffer[24] =0;
+	buffer[25] =(byte)distance;
+	buffer[26] =0;
+	buffer[27] =0;
 	instance.addToArray(buffer);
     return TLValue.VOID;
   }
