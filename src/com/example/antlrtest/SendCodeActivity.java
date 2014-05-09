@@ -114,7 +114,7 @@ public class SendCodeActivity extends Activity {
     	int timeToRun = data[11];
     	System.out.println("Data 11 is:" +data[11]);
     	try {
-			Thread.sleep(750*timeToRun);
+			Thread.sleep(400*timeToRun);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

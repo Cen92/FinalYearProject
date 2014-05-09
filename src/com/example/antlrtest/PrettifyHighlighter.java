@@ -3,7 +3,6 @@ package com.example.antlrtest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import prettify.PrettifyParser;
 import syntaxhighlight.ParseResult;
 import syntaxhighlight.Parser;

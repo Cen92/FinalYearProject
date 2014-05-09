@@ -15,7 +15,10 @@ public class SColonTokenizer implements Tokenizer {
 		while (i > 0 && text.charAt(i - 1) != ';') {
 			i--;
 		}
-		while (i < cursor && text.charAt(i) == ' ') {
+		if ((i+4<cursor) && (text.subSequence(i, i+4).toString().equals("<br>"))) {
+			i+=4;
+		}
+		while (i < cursor && (text.charAt(i) == ' ' || text.charAt(i) == '\n')) {
 			i++;
 		}
 
