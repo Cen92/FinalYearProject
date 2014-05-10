@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
     	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
-    	String highlighted = highlighter.highlight("java", code);
+    	String highlighted = highlighter.highlight("bcr", code);
     	String newSTR = highlighted.replace(";",";<br>");
     	textView.setText(Html.fromHtml(newSTR));
     	textView.setSelection(textView.getText().length());
