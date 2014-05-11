@@ -22,7 +22,7 @@ public class Main {
 
 
 	public TLValue main(String file) throws Exception {
-
+		
 		//TLLexer lexer = new TLLexer(new ANTLRFileStream(file));
 		TLLexer lexer = new TLLexer(new ANTLRStringStream(file));
 		// wrap a token-stream around the lexer
@@ -34,7 +34,6 @@ public class Main {
 		// walk the tree
 		CommonTree tree = (CommonTree) parser.parse().getTree();
 		CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-
 		// pass the reference to the Map of functions to the tree walker
 		TLTreeWalker walker = new TLTreeWalker(nodes, parser.functions);
 
@@ -44,5 +43,7 @@ public class Main {
 		TLValue output = returned.evaluate();
 		
 		return output;
+		
+		
 	}
 }

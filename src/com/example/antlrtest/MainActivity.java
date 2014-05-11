@@ -1,3 +1,11 @@
+/**
+ * MainActivity.java
+ * Created by Cionnat Breathnach on 28/03/2014.
+ * Copyright (c) 2014 Cionnat Breathnach. All rights reserved.
+ * MainActivity.java is the Main Activity class for Mind Coder. Here all the UI elements are
+ * set up for editing code and the user has access to all buttons for accessing other views.
+ */
+
 package com.example.antlrtest;
 
 import java.io.FileNotFoundException;
@@ -143,11 +151,18 @@ public class MainActivity extends Activity {
     	
     }
     
+    /**
+     * prettifyCode
+     * Called From: TextWatcher.OnTextChanged()
+     * Converts the code in the code editor to code with HTML tags wrapped around for 
+     * syntax highlighting.
+     */
+    
     public void prettifyCode(){
     	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = textView.getText().toString();
     	PrettifyHighlighter highlighter = new PrettifyHighlighter();
-    	String highlighted = highlighter.highlight("java", code);
+    	String highlighted = highlighter.highlight("bcr", code);
     	String newSTR = highlighted.replace(";",";<br>");
 
     	textView.setText(Html.fromHtml(newSTR));
@@ -219,14 +234,14 @@ public class MainActivity extends Activity {
         		try {
         	MultiAutoCompleteTextView in = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
             String source = in.getText().toString();
-            TLValue parserOutput = object.main(source);
             
+            TLValue parserOutput = object.main(source);
             Intent intent = new Intent(this, SendCodeActivity.class);
             startActivity(intent);
             
         		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 
 		}
     }

@@ -24,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class SendCodeActivity extends Activity {
 	BluetoothManager bm;
@@ -50,6 +51,7 @@ public class SendCodeActivity extends Activity {
 		    // Loop through paired devices
 		    for (BluetoothDevice device : bondedDevices) {
 		        // Add the name and address to an array to show in a ListView
+		    	
 		    	pdArrayList.add(device.getName() + "\n" + device.getAddress());
 		    }
 		}
@@ -93,6 +95,10 @@ public class SendCodeActivity extends Activity {
                  connectThread.start();
              }
         }); 
+	}
+	
+	public void showError(){
+    	Toast.makeText(getApplicationContext(), "Error connecting to device", Toast.LENGTH_LONG).show();
 	}
 	public void sendCommand(int i){
 			
@@ -142,7 +148,13 @@ public class SendCodeActivity extends Activity {
                 connectedThread = new ConnectedThread(mmSocket); 
                 connectedThread.start();
             } catch (IOException e) {
-                e.printStackTrace();
+//            	showError();
+            	runOnUiThread(new Runnable() {
+            		  public void run() {
+            		    	Toast.makeText(getApplicationContext(), "Error connecting to device", Toast.LENGTH_LONG).show();
+            		  }
+            		});
+    	    	e.printStackTrace();
             }
         }
         

@@ -34,7 +34,7 @@ public class PrettifyHighlighter {
         Map<String, String> map = new HashMap<String, String>();
         map.put("typ", "87cefa");
         map.put("kwd", "87cefa");//function names
-        map.put("lit", "87cefa");//variables
+        map.put("lit", "78AB46");//variables
         map.put("com", "ff0000");
         map.put("str", "ff4500");
         map.put("pun", "ff9900");//brackets
