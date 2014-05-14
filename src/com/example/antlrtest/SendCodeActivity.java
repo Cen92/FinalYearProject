@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -24,6 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SendCodeActivity extends Activity {
@@ -69,6 +72,9 @@ public class SendCodeActivity extends Activity {
             }
         });
 		
+		TextView text = (TextView) findViewById(R.id.pairedDevices);
+		text.setTextColor(Color.parseColor("#FFFFFF"));
+		
 		// Define a new Adapter
         // First parameter - Context
         // Second parameter - Layout for the row
@@ -110,6 +116,11 @@ public class SendCodeActivity extends Activity {
     		bm.codeToSend.clear();
     		numberOfCommandsSent = 0;
     	}	
+	}
+	
+	public void searchForDevices(View view){
+		Intent intent = new Intent(this, SearchAndPair.class);
+		startActivity(intent);
 	}
 	
 	private void write(byte[] data){

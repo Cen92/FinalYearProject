@@ -12,18 +12,21 @@
     <string name="highlight">Highlight</string>
     <string name="code_hint">Enter some code&#8230;</string>
     <string name="files">File Browser</string>
-    <string name="fileNameText">Filename&#8230;</string><!--&#8230 is ...  -->
+    <string name="fileNameText">Filename&#8230;</string> <!-- &#8230 is ... -->
     <string name="save">Save</string>
     <string name="load">Load</string>
     <string name="run">Run</string>
-    
-    
+    <string name="pairedDevices">Paired Devices</string>
+    <string name="search">Search</string>
+
     <string-array name="list_of_suggestions">
-      <item>moveForward()</item>
-      <item>moveBackward()</item>
-      <item>shoot()</item>
-      <item>turnLeft()</item>
-      <item>turnRight()</item>
-      </string-array>
+        <item>moveForward()</item>
+        <item>moveBackward()</item>
+        <item>shoot()</item>
+        <item>turnLeft()</item>
+        <item>turnRight()</item>
+    </string-array>
+
+    <string name="title_activity_search_and_pair">SearchAndPair</string>
 
 </resources>

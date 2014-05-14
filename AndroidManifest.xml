@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
-        
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/ic_launcher"
@@ -20,9 +19,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.antlrtest.MainActivity"
-            android:screenOrientation="landscape"
-            
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,9 +30,8 @@
         <activity
             android:name="com.example.antlrtest.SendCodeActivity"
             android:label="@string/title_activity_send_code"
-            android:screenOrientation="landscape"
-            
-            android:parentActivityName="com.example.antlrtest.MainActivity" >
+            android:parentActivityName="com.example.antlrtest.MainActivity"
+            android:screenOrientation="landscape" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.antlrtest.MainActivity" />
@@ -42,19 +39,17 @@
         <activity
             android:name="com.example.antlrtest.FilesTableActivity"
             android:label="@string/title_activity_files_table"
-            android:screenOrientation="landscape"
-            
-            android:parentActivityName="com.example.antlrtest.MainActivity" >
+            android:parentActivityName="com.example.antlrtest.MainActivity"
+            android:screenOrientation="landscape" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.antlrtest.MainActivity" />
         </activity>
         <activity
             android:name="com.example.antlrtest.MethodListActivity"
-            android:label="@string/title_method_list" 
-            android:screenOrientation="landscape"
-
-            android:parentActivityName="com.example.antlrtest.MainActivity" >
+            android:label="@string/title_method_list"
+            android:parentActivityName="com.example.antlrtest.MainActivity"
+            android:screenOrientation="landscape" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.antlrtest.MainActivity" />
@@ -62,12 +57,15 @@
         <activity
             android:name="com.example.antlrtest.MethodDetailActivity"
             android:label="@string/title_method_detail"
-            android:screenOrientation="landscape"
-
-            android:parentActivityName=".MethodListActivity" >
+            android:parentActivityName=".MethodListActivity"
+            android:screenOrientation="landscape" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MethodListActivity" />
+        </activity>
+        <activity
+            android:name="com.example.antlrtest.SearchAndPair"
+            android:label="@string/title_activity_search_and_pair" >
         </activity>
     </application>
 
