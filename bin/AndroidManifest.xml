@@ -65,7 +65,12 @@
         </activity>
         <activity
             android:name="com.example.antlrtest.SearchAndPair"
-            android:label="@string/title_activity_search_and_pair" >
+            android:label="@string/title_activity_search_and_pair" 
+            android:parentActivityName="com.example.antlrtest.SendCodeActivity"
+            >
+       	 <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SendCodeActivity" />
         </activity>
     </application>
 

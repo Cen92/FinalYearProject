@@ -6,7 +6,9 @@ import java.util.List;
 
 import main.tl.Scope;
 import main.tl.TLValue;
-
+/**
+ * Instanciated when = is in code. Assigns TLValue to variable
+ */
 public class AssignmentNode implements TLNode {
 
   protected String identifier;

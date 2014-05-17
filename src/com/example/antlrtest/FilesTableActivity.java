@@ -1,6 +1,7 @@
 package com.example.antlrtest;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,13 +20,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import android.widget.Toast;
+/**
+ * Displays a list of all files stored. Click to load, longclick to delete
+ * @author cbreathnach
+ *
+ */
 public class FilesTableActivity extends Activity {
 	
 	ListView listView;
-	
+	String fileName;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,8 +50,32 @@ public class FilesTableActivity extends Activity {
     			arrayList.add(allFiles[i].toString());
 
 		    }
+    		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setTitle("Confirm");
+	        builder.setMessage("Are you sure you want to delete file?");
+	        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
-    		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	            public void onClick(DialogInterface dialog, int which) {
+	            	
+	            	File dir = getFilesDir();
+	            	File file = new File(dir, fileName);
+	            	boolean deleted = file.delete();
+	    	    	Toast.makeText(getApplicationContext(), "Deleted: " + fileName, Toast.LENGTH_LONG).show();
+	                dialog.dismiss();
+	            }
+
+	        });
+	        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+	                // Do nothing
+	                dialog.dismiss();
+	            }
+	        });
+	        final AlertDialog alert = builder.create();
+
+    		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		          android.R.layout.simple_list_item_1, allFiles);
 
 
@@ -79,7 +112,18 @@ public class FilesTableActivity extends Activity {
 		                 
 		             }
 		        }); 
-
+		        listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+		            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+		                    final int pos, long id) {
+		                // TODO Auto-generated method stub
+		            	System.out.println("Long clikc");
+		            	fileName = arrayList.get(pos).toString();
+		            	
+		            	builder.setMessage("Are you sure you want to delete file: ?"+ fileName);
+		            	alert.show();
+		    	    	return true;
+		            }
+		        }); 
 	}
 
 	protected void loadStringToCodeEditor(String fileName, String code) {

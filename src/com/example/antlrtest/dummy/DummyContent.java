@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- * <p>
- * TODO: Replace all uses of this class before publishing your app.
+ * Provides list of documentation items to documentation.
  */
 public class DummyContent {
 
@@ -53,7 +50,7 @@ public class DummyContent {
 
 		@Override
 		public String toString() {
-			return exampleUse;
+			return content;
 		}
 	}
 }

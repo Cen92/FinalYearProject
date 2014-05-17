@@ -4,7 +4,12 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
-
+/**
+ * Splits code on semi colon character. Used for autocomplete/suggestion functionality. 
+ * Modeled on Comma Tokenizer
+ * @author cbreathnach
+ *
+ */
 public class SColonTokenizer implements Tokenizer {
 
 	public int findTokenStart(CharSequence text, int cursor) {

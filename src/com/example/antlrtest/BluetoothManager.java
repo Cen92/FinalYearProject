@@ -1,8 +1,11 @@
 package com.example.antlrtest;
 
 import java.util.ArrayList;
-
-
+/**
+ * Singleton ANTLR Nodes add to array stored here.
+ * @author cbreathnach
+ *
+ */
 public class BluetoothManager {
 	public ArrayList<byte[]> codeToSend;
 	private static BluetoothManager instance;
@@ -10,6 +13,9 @@ public class BluetoothManager {
 		codeToSend = new ArrayList<byte[]>();
 	}
 	
+	/**
+	 * @return
+	 */
 	public static BluetoothManager getInstance() { //quick and dirty way to instanciate var. 
 	    if (instance == null) {
 	        instance = new BluetoothManager();

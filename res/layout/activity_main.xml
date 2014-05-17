@@ -54,20 +54,12 @@
     	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        <Button
-            android:id="@+id/pretty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:onClick="prettify"
-            android:text="@string/highlight" />
 
         <Button
             android:id="@+id/documentation_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:onClick="documentation"
-            android:background="?android:attr/selectableItemBackground"
            	android:text="@string/document" />
 
         <Button
@@ -75,7 +67,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="sendMessage"
-            android:background="?android:attr/selectableItemBackground"            
             android:text="@string/run" />
 	</LinearLayout>
 </LinearLayout>

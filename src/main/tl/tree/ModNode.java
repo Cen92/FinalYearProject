@@ -3,7 +3,9 @@ package main.tl.tree;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when % is in code. Returns a % b
+ */
 public class ModNode implements TLNode {
 
   private TLNode lhs;

@@ -6,7 +6,9 @@ import com.example.antlrtest.BluetoothManager;
 
 import main.tl.TLValue;
 import main.tl.tree.TLNode;
-
+/**
+ * Instanciated when turnLeft is in code. Takes parameter and converts to NXT API syntax
+ */
 public class TurnLeftNode implements TLNode {
 
   private TLNode expression;

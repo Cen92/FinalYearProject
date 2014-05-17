@@ -33,7 +33,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
-
+/**
+ * Main activity. Code editor is in here. Launched when app is run.
+ * 
+ * @author cbreathnach
+ *
+ */
 public class MainActivity extends Activity {
 	
 	public BluetoothManager bm;
@@ -45,9 +50,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,suggestions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,suggestions);
         final MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
-        textView.addTextChangedListener(mTextEditorWatcher);
         textView.setAdapter(adapter);
         textView.setTokenizer(new SColonTokenizer());
         textView.setOnItemClickListener(new OnItemClickListener ()
@@ -58,33 +62,22 @@ public class MainActivity extends Activity {
               textView.setSelection(textView.getText().length()-1);//set cursor to inside parenthesis
              }
         });
+        textView.addTextChangedListener(mTextEditorWatcher);
+
         
     }
     
     public final TextWatcher  mTextEditorWatcher = new TextWatcher() {
-        
     	String old;
-    	
-        public void beforeTextChanged(CharSequence s, int start, int count, int after)
+    	public void beforeTextChanged(CharSequence s, int start, int count, int after)
         {
         	//do nothing method is needed by textWatcher
         }
-
-        public void onTextChanged(CharSequence s, int start, int before, int count)
+    	public void onTextChanged(CharSequence s, int start, int before, int count)
         {
         	//do nothing method is needed by textWatcher
-//        	if(s.toString().contains(";")){
-//        		old=s.toString();
-//        		char lastChar = old.charAt(old.length()-1);
-//        		if(lastChar == ';'){
-//        			prettifyCode();
-//        		}
-//        			
-//           }
-
         }
-
-        public void afterTextChanged(Editable s)
+    	public void afterTextChanged(Editable s)
         {
         	if(s.toString().contains(";")){
         		old=s.toString();
@@ -135,18 +128,6 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
-    
-    
-    public void prettify(View view){
-    	MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
-        String code = textView.getText().toString();
-    	PrettifyHighlighter highlighter = new PrettifyHighlighter();
-    	String highlighted = highlighter.highlight("bcr", code);
-    	String newSTR = highlighted.replace(";",";<br>");
-    	textView.setText(Html.fromHtml(newSTR));
-    	textView.setSelection(textView.getText().length());
-    }
-    
     public void addToSuggestions(String[] words){
     	
     }
@@ -172,11 +153,9 @@ public class MainActivity extends Activity {
     	String[] newSuggestions = new String[words.length];
         String[] suggestions = getResources().getStringArray(R.array.list_of_suggestions);
 		int nextIndex = 0;
-
-        
-    	for(int i=0;i<words.length;i++){
+		for(int i=0;i<words.length;i++){
     		if(words[i].toString().contains("(") || words[i].toString().contains(")")){
-    			//do nothing
+    			//do nothing, no not wish to add to array
     		}
     		if(words[i].toString().contains(";")){
     			String newWordWithoutSemiColon = words[i];
@@ -189,8 +168,7 @@ public class MainActivity extends Activity {
                 nextIndex++;
             }
     	}
-    	
-    	List list = new ArrayList(Arrays.asList(suggestions));
+    	List<String> list = new ArrayList<String>(Arrays.asList(suggestions));
     	list.addAll(Arrays.asList(newSuggestions));
     	Object[] results = list.toArray(); 
     	System.out.println(Arrays.toString(results));
@@ -201,7 +179,6 @@ public class MainActivity extends Activity {
     public void saveFile(View view){
     	EditText textView = (EditText)findViewById(R.id.editText_filename);
     	String FILENAME = textView.getText().toString();
-    	
     	MultiAutoCompleteTextView codeEditor = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         String code = codeEditor.getText().toString();
     	FileOutputStream fos;
@@ -213,15 +190,12 @@ public class MainActivity extends Activity {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	    	Toast.makeText(getApplicationContext(), "Error saving file enter a filename " + FILENAME, Toast.LENGTH_LONG).show();
-
+	    	Toast.makeText(getApplicationContext(), "Error saving file, Enter a filename! " + FILENAME, Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 	    	Toast.makeText(getApplicationContext(), "Error saving file" + FILENAME, Toast.LENGTH_LONG).show();
-
 		}
-    	
     }
     public void loadFile(View view){
         Intent intent = new Intent(this, FilesTableActivity.class);
@@ -231,19 +205,16 @@ public class MainActivity extends Activity {
     public void sendMessage(View view) {
         Main object = new Main();
         //BluetoothManager bm = new BluetoothManager();
-        		try {
-        	MultiAutoCompleteTextView in = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
-            String source = in.getText().toString();
-            
-            TLValue parserOutput = object.main(source);
-            Intent intent = new Intent(this, SendCodeActivity.class);
-            startActivity(intent);
-            
-        		} catch (Exception e) {
+        	try {
+        		MultiAutoCompleteTextView in = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
+        		String source = in.getText().toString();
+        		TLValue parserOutput = object.main(source);
+        		Intent intent = new Intent(this, SendCodeActivity.class);
+        		startActivity(intent);
+            } catch (Exception e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-
-		}
+			e.printStackTrace();
+		 }
     }
     
     @Override

@@ -28,7 +28,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * Sends code to the NXT device from code stored in Bluetooth Manager. 
+ * @author cbreathnach
+ *
+ */
 public class SendCodeActivity extends Activity {
 	BluetoothManager bm;
 	BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -109,6 +113,8 @@ public class SendCodeActivity extends Activity {
 	public void sendCommand(int i){
 			
 			byte [] command = bm.codeToSend.get(i);
+			System.out.println(command);
+			
     		write(command);
     		
     	if(i >= bm.codeToSend.size()){
@@ -127,6 +133,7 @@ public class SendCodeActivity extends Activity {
 			
     	ConnectedThread ct;
     	ct = connectedThread;
+    	System.out.println(data);
     	ct.write(data);
     	int timeToRun = data[11];
     	System.out.println("Data 11 is:" +data[11]);
@@ -140,45 +147,42 @@ public class SendCodeActivity extends Activity {
     	sendCommand(numberOfCommandsSent);
     	
     }
-    
-    private class ConnectThread extends Thread {
-        private BluetoothSocket mmSocket;
-        private final BluetoothDevice mmDevice;
-        
-        public ConnectThread(BluetoothDevice device) {
-            mmDevice = device;
-        }
-        
-        public void run() {
-            setName("ConnectThread");
-            mBluetoothAdapter.cancelDiscovery();
-            
-            try {
-                mmSocket = mmDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-                mmSocket.connect();
-                connectedThread = new ConnectedThread(mmSocket); 
+
+	private class ConnectThread extends Thread{
+	    private BluetoothSocket mmSocket;
+	    private final BluetoothDevice mmDevice;
+		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+	    
+	    public ConnectThread(BluetoothDevice device) {
+	        mmDevice = device;
+	    }
+	    
+	    public void run() {
+	        setName("ConnectThread");
+	        mBluetoothAdapter.cancelDiscovery();
+	        
+	        try {
+	            mmSocket = mmDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+	            mmSocket.connect();
+	            connectedThread = new ConnectedThread(mmSocket);
                 connectedThread.start();
-            } catch (IOException e) {
-//            	showError();
-            	runOnUiThread(new Runnable() {
-            		  public void run() {
-            		    	Toast.makeText(getApplicationContext(), "Error connecting to device", Toast.LENGTH_LONG).show();
-            		  }
-            		});
-    	    	e.printStackTrace();
-            }
-        }
-        
-        public void cancel() {
-            try {
-                if (mmSocket != null) {
-                    mmSocket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	            
+	        } catch (IOException e) {
+		    	e.printStackTrace();
+	        }
+	    }
+	    
+	    public void cancel() {
+	        try {
+	            if (mmSocket != null) {
+	                mmSocket.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
     
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
@@ -217,7 +221,7 @@ public class SendCodeActivity extends Activity {
         }
          public void write(byte[] buffer) {
             try {
-            	
+            	System.out.println("Buffer: "+buffer);
                 mmOutStream.write(buffer);
             } catch (IOException e) {
                 e.printStackTrace();

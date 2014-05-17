@@ -3,7 +3,9 @@ package main.tl.tree;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when * is in code. Multiplies value from LHS by RHS
+ */
 public class MultNode implements TLNode {
 
   private TLNode lhs;

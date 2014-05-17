@@ -3,7 +3,9 @@ package main.tl.tree;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when + is in code. Adds value from LHS to RHS
+ */
 public class AddNode implements TLNode {
 
   private TLNode lhs;

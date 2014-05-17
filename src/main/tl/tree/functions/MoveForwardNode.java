@@ -1,5 +1,7 @@
 package main.tl.tree.functions;
-
+/**
+ * Instanciated when moveForward is in code. Takes parameter and converts to NXT API syntax
+ */
 import java.io.PrintStream;
 
 import com.example.antlrtest.BluetoothManager;

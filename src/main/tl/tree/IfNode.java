@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when if is in code. Evaluates value
+ */
 public class IfNode implements TLNode {
 
   private List<Choice> choices;

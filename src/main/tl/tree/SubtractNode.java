@@ -3,7 +3,9 @@ package main.tl.tree;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when - is in code. Subtracts value from RHS from LHS
+ */
 public class SubtractNode implements TLNode {
 
   private TLNode lhs;

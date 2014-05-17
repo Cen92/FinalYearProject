@@ -6,7 +6,8 @@
     <ListView
         android:id="@+id/filesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:longClickable="true">
     </ListView>
 
 </LinearLayout>

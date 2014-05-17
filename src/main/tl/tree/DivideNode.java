@@ -3,7 +3,9 @@ package main.tl.tree;
 import java.util.List;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when / is in code. Divides value on LHS by RHS
+ */
 public class DivideNode implements TLNode {
 
   private TLNode lhs;

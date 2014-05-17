@@ -1,7 +1,9 @@
 package main.tl.tree;
 
 import main.tl.TLValue;
-
+/**
+ * Instanciated when < is in code. Evaluates if a < b
+ */
 public class LTNode implements TLNode {
 
   private TLNode lhs;

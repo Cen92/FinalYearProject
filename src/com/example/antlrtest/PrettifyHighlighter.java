@@ -6,7 +6,11 @@ import java.util.Map;
 import prettify.PrettifyParser;
 import syntaxhighlight.ParseResult;
 import syntaxhighlight.Parser;
-
+/**
+ * Highlight class used in syntax highlighting
+ * @author cbreathnach
+ *
+ */
 public class PrettifyHighlighter {
     private static final Map<String, String> COLORS = buildColorsMap();
 

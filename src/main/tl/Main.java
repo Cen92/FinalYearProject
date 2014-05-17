@@ -39,7 +39,6 @@ public class Main {
 
 		// get the returned node
 		TLNode returned = walker.walk();
-		//System.out.println(returned == null ? "null" : returned.evaluate());
 		TLValue output = returned.evaluate();
 		
 		return output;
