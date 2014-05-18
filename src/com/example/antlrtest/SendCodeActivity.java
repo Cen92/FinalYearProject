@@ -136,7 +136,6 @@ public class SendCodeActivity extends Activity {
     	System.out.println(data);
     	ct.write(data);
     	int timeToRun = data[11];
-    	System.out.println("Data 11 is:" +data[11]);
     	try {
 			Thread.sleep(400*timeToRun);
 		} catch (InterruptedException e) {
@@ -152,27 +151,28 @@ public class SendCodeActivity extends Activity {
 	    private BluetoothSocket mmSocket;
 	    private final BluetoothDevice mmDevice;
 		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-	    
-	    public ConnectThread(BluetoothDevice device) {
+		public ConnectThread(BluetoothDevice device) {
 	        mmDevice = device;
 	    }
-	    
 	    public void run() {
 	        setName("ConnectThread");
 	        mBluetoothAdapter.cancelDiscovery();
-	        
 	        try {
 	            mmSocket = mmDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
 	            mmSocket.connect();
 	            connectedThread = new ConnectedThread(mmSocket);
                 connectedThread.start();
 	            
-	        } catch (IOException e) {
+	        } catch (final IOException e) {
+	        	runOnUiThread(new Runnable(){
+	                @Override
+	                public void run(){
+	                	Toast.makeText(getApplicationContext(), "Error connecting to device: " +e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+	                }
+	             });
 		    	e.printStackTrace();
 	        }
 	    }
-	    
 	    public void cancel() {
 	        try {
 	            if (mmSocket != null) {
@@ -183,7 +183,6 @@ public class SendCodeActivity extends Activity {
 	        }
 	    }
 	}
-    
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;

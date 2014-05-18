@@ -204,7 +204,6 @@ public class MainActivity extends Activity {
     
     public void sendMessage(View view) {
         Main object = new Main();
-        //BluetoothManager bm = new BluetoothManager();
         	try {
         		MultiAutoCompleteTextView in = (MultiAutoCompleteTextView)findViewById(R.id.code_text);
         		String source = in.getText().toString();

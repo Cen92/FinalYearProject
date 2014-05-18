@@ -23,7 +23,6 @@ public class Main {
 
 	public TLValue main(String file) throws Exception {
 		
-		//TLLexer lexer = new TLLexer(new ANTLRFileStream(file));
 		TLLexer lexer = new TLLexer(new ANTLRStringStream(file));
 		// wrap a token-stream around the lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
