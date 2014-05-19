@@ -111,17 +111,23 @@ public class SendCodeActivity extends Activity {
     	Toast.makeText(getApplicationContext(), "Error connecting to device", Toast.LENGTH_LONG).show();
 	}
 	public void sendCommand(int i){
-			
-			byte [] command = bm.codeToSend.get(i);
-			System.out.println(command);
-			
-    		write(command);
-    		
-    	if(i >= bm.codeToSend.size()){
+		if(i >= bm.codeToSend.size()){
     		moreToSend = false;
     		bm.codeToSend.clear();
     		numberOfCommandsSent = 0;
-    	}	
+    	}
+    	else{
+    		try{
+       		Toast.makeText(getApplicationContext(), "Sending Command:" + i, Toast.LENGTH_SHORT).show();
+    		byte [] command = bm.codeToSend.get(i);
+			System.out.println(command);
+    		write(command);
+    		}
+    		catch (Exception e){
+    			e.printStackTrace();
+    			Toast.makeText(getApplicationContext(), "Error sending code: "+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+    		}
+    	}
 	}
 	
 	public void searchForDevices(View view){
@@ -142,9 +148,10 @@ public class SendCodeActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		numberOfCommandsSent++;
-    	sendCommand(numberOfCommandsSent);
-    	
+    	if(numberOfCommandsSent < bm.codeToSend.size()){
+    		numberOfCommandsSent++;
+    		sendCommand(numberOfCommandsSent);
+    	}
     }
 
 	private class ConnectThread extends Thread{

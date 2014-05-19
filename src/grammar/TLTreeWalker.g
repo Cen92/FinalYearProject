@@ -88,7 +88,7 @@ ifStatement returns [TLNode node]
   ;
    
 forStatement returns [TLNode node]
-  :  ^(For Identifier expression expression block)
+  :  ^(For Identifier a=expression b=expression block) {node = new ForStatementNode($Identifier.text, $a.node, $b.node, $block.node, currentScope);}
   ;
 
 whileStatement returns [TLNode node]
